@@ -7,5 +7,4 @@
 WolfxApi 提供api接口
 
 # 注意
-github上不公开发行版
-要下载该软件，请到https://gitee.com/dxr2222/earthquake-warning
+为避免缩放问题，请用Java9以上版本运行。
