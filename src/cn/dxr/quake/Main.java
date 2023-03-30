@@ -5,7 +5,6 @@ import cn.dxr.quake.app.AppTray;
 import cn.dxr.quake.app.StartDataWriter;
 import cn.dxr.quake.app.VersionChecker;
 
-import javax.swing.*;
 import java.io.IOException;
 
 public class Main {
@@ -27,8 +26,5 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // 弹窗提示
-        JOptionPane.showMessageDialog(null,"关闭此窗口后，程序将在后台运行，收到地震预警时将弹出。若关闭窗口后需要重新显示此窗口,请点击程序托盘图标。");
     }
 }

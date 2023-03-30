@@ -11,8 +11,7 @@ import org.apache.commons.io.FileUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -29,7 +28,7 @@ public class MainWindow {
 
     public MainWindow() {
         // 定义程序窗口及控件属性
-        jFrame.setTitle("地震预警 v1.4.2");
+        jFrame.setTitle("地震预警 v1.5.1");
         Image image = Toolkit.getDefaultToolkit().getImage("Files\\img\\icon.png");
         jFrame.setIconImage(image);
         jFrame.setSize(330, 330);
@@ -116,6 +115,14 @@ public class MainWindow {
             }
         });
 
+        // 窗口关闭事件监听器
+        jFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                AppTray.showMessage("提示","地震预警正在后台运行,当收到地震预警且本地烈度达到预警阀值时主窗口将会弹出");
+            }
+        });
+
         // 实例化声音播放类
         SoundUtil soundUtil = new SoundUtil();
 
@@ -125,6 +132,7 @@ public class MainWindow {
             public void run() {
                 File path = new File("Files\\settings.json");
                 File path1 = new File("Files\\start.json");
+                File path2 = new File("Files\\int.json");
                 try {
                     String url = HttpUtil.sendGet("https://mobile.chinaeew.cn", "/v1/earlywarnings?updates=&start_at=");
                     JSONObject jsonObj = JSON.parseObject(url);
@@ -135,44 +143,21 @@ public class MainWindow {
                     DecimalFormat decimalFormat = new DecimalFormat("0.0");
                     SimpleDateFormat format =  new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
                     Long time = new Long(json.getString("startAt"));
-                    double maxInt = 0.24 + 1.29 * json.getDouble("magnitude");
+                    double maxInt = calcMaxInt(json.getDouble("magnitude"),json.getDouble("depth"));
                     double arriveTime = Double.parseDouble(decimalFormat.format(getArriveTime()));
                     String date = format.format(time);
-                    try {
-                        String file = FileUtils.readFileToString(path);
-                        JSONObject jsonObject = JSON.parseObject(file);
-                        double userLat = jsonObject.getDouble("Lat");
-                        double userlng = jsonObject.getDouble("Lng");
-                        String distance = decimalFormat.format(DistanceUtil.getDistance(userlng, userLat, epicenterLng, epicenterLat));
-                        double local = 0.92 + 1.63 * json.getDouble("magnitude") - 3.49 * Math.log10(Double.parseDouble(distance));
-                        String localInt = decimalFormat.format(local);
-                        if (local < 0) {
-                            localInt = "0.0";
-                        }
-                        String feel = "";
-                        if (local < 1) {
-                            feel = "无震感";
-                        }
-                        if (local >= 1 && local < 2) {
-                            feel = "震感轻微";
-                        }
-                        if (local >= 2 && local < 3) {
-                            feel = "高楼层有感";
-                        }
-                        if (local >= 3 && local < 4) {
-                            feel = "震感较强";
-                        }
-                        if (local >= 4 && local < 5) {
-                            feel = "震感强烈";
-                        }
-                        if (local >= 5) {
-                            feel = "震感极强";
-                        }
-                        label10.setText("本地烈度: " + localInt + "度" + " " + feel);
-                        label9.setText("震中距: 约" + distance + "KM");
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    String file = FileUtils.readFileToString(path);
+                    JSONObject jsonObject = JSON.parseObject(file);
+                    double userLat = jsonObject.getDouble("Lat");
+                    double userlng = jsonObject.getDouble("Lng");
+                    String distance = decimalFormat.format(DistanceUtil.getDistance(userlng, userLat, epicenterLng, epicenterLat));
+                    double local = 0.92 + 1.63 * json.getDouble("magnitude") - 3.49 * Math.log10(Double.parseDouble(distance));
+                    String localInt = decimalFormat.format(local);
+                    if (local < 0) {
+                        localInt = "0.0";
                     }
+                    label10.setText("本地烈度: " + localInt + "度" + " " + getFeel());
+                    label9.setText("震中距: 约" + distance + "KM");
                     String file1 = FileUtils.readFileToString(path1);
                     JSONObject jsonObject1 = JSON.parseObject(file1);
                     label.setText("  地震预警  ");
@@ -180,11 +165,37 @@ public class MainWindow {
                     label3.setText("    震源深度: " + decimalFormat.format(json.getDouble("depth")) + "KM   ");
                     label6.setText("发震时刻: " + date);
                     label8.setText("最大烈度: " + decimalFormat.format(maxInt) + "度");
+                    String file2 = FileUtils.readFileToString(path2);
+                    JSONObject jsonObject2 = JSON.parseObject(file2);
+                    double userInt = jsonObject2.getDouble("Int");
                     if (!Objects.equals(json.getString("eventId"), jsonObject1.getString("ID"))) {
                         if (!Objects.equals(json.getString("eventId"), EventID)) {
-                            soundUtil.playSound("sounds\\First.wav");
-                            jFrame.setAlwaysOnTop(true);
-                            jFrame.setVisible(true);
+                            if (local < 0) {
+                                jPanel.setBackground(Color.gray);
+                            }
+                            if (local >= 0 && local < 1) {
+                                jPanel.setBackground(Color.gray);
+                            }
+                            if (local >= 1 && local < 2) {
+                                jPanel.setBackground(new Color(121, 118, 5, 255));
+                            }
+                            if (local >= 2 && local < 3) {
+                                jPanel.setBackground(new Color(169, 142, 27, 255));
+                            }
+                            if (local >= 3 && local < 4) {
+                                jPanel.setBackground(new Color(185, 85, 13, 255));
+                            }
+                            if (local >=4 && local < 5) {
+                                jPanel.setBackground(new Color(168, 37, 8, 255));
+                            }
+                            if (local >= 5) {
+                                jPanel.setBackground(new Color(147, 7, 7, 255));
+                            }
+                            if (local > userInt) {
+                                soundUtil.playSound("sounds\\First.wav");
+                                jFrame.setAlwaysOnTop(true);
+                                jFrame.setVisible(true);
+                            }
                             AppTray.showMessage("现正发生有感地震",decimalFormat.format(json.getDouble("magnitude")) + "级地震," + arriveTime + "秒后抵达\n" + "您所在的地区将" + getFeel() + ",请合理避险!");
                             EventID = json.getString("eventId");
                         } else {
@@ -241,7 +252,6 @@ public class MainWindow {
                     label11.setText("地震横波已抵达");
                     if (!Objects.equals(json.getString("eventId"), jsonObject1.getString("ID"))) {
                         if (!Objects.equals(json.getString("eventId"), EventID)) {
-                            jPanel.setBackground(new Color(128, 16, 16, 255));
                             // 倒计时
                             for (int i = time; i > -1; i--) {
                                 label11.setText("地震横波将在" + i + "秒后抵达");
@@ -307,7 +317,7 @@ public class MainWindow {
                 feel = "无震感";
             }
             if (local >= 1 && local < 2) {
-                feel = "震感轻微";
+                feel = "可能有震感";
             }
             if (local >= 2 && local < 3) {
                 feel = "高楼层有感";
@@ -327,8 +337,15 @@ public class MainWindow {
         }
         return null;
     }
+
+    // 计算烈度
+    public static double calcMaxInt(double magnitude, double depth) {
+        double a = 1.65 * magnitude;
+        double b = depth < 10 ? 1.21 * Math.log10(10) : 1.21 * Math.log10(depth);
+        return (double) Math.round(a / b);
+    }
+
     public static void show() {
         jFrame.setVisible(true);
     }
 }
-

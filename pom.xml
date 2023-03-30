@@ -6,7 +6,7 @@
 
     <groupId>com.lxfly2000</groupId>
     <artifactId>earthquake-warning</artifactId>
-    <version>1.4.2-SNAPSHOT</version>
+    <version>1.5.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

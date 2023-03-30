@@ -80,7 +80,7 @@ public class AppTray {
                             double lng = json.getDouble("longitude");
                             String mag = json.getString("magnitude");
                             String depth = json.getString("depth");
-                            double maxInt = 0.24 + 1.29 * json.getDouble("magnitude");
+                            double maxInt = MainWindow.calcMaxInt(json.getDouble("magnitude"),json.getDouble("depth"));
                             showMessage("中国地震台网" + type,time + "在" + region + "(北纬" + lat + "度,东经" + lng + "度)" + "发生" + mag + "级地震,震源深度" + depth +"公里,预估最大烈度" + decimalFormat.format(maxInt) + "度");
                             id = json.getString("id");
                         }
