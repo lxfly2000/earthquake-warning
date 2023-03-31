@@ -4,6 +4,7 @@ import cn.dxr.quake.Utils.DistanceUtil;
 import cn.dxr.quake.Utils.HttpUtil;
 import cn.dxr.quake.Utils.SoundUtil;
 import cn.dxr.quake.app.AppTray;
+import cn.dxr.quake.app.VersionChecker;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -33,16 +34,13 @@ public class MainWindow {
 
     public MainWindow() {
         // 定义程序窗口及控件属性
-        String title="地震预警";
         try{
-            JSONObject jVersion=JSON.parseObject(FileUtils.readFileToString(new File("Files/version.json")));
             JSONObject jURL=JSON.parseObject(FileUtils.readFileToString(new File("Files/settings.json")));
-            title+=" v"+jVersion.getString("version");
             postUrl=jURL.getString("PushURL");
         }catch (IOException e){
             e.printStackTrace();
         }
-        jFrame.setTitle(title);
+        jFrame.setTitle("地震预警 v"+ VersionChecker.currentVersion);
         Image image = Toolkit.getDefaultToolkit().getImage("Files\\img\\icon.png");
         jFrame.setIconImage(image);
         jFrame.setSize(330, 330);

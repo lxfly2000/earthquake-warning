@@ -11,13 +11,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class VersionChecker {
+    public static final String currentVersion="1.6.0";
 
     // 获取软件当前版本
-    private String getVersion() throws IOException {
-        File file = new File("Files\\version.json");
-        String file1 = FileUtils.readFileToString(file);
-        JSONObject jsonObject = JSON.parseObject(file1);
-        return jsonObject.getString("version");
+    public String getVersion() throws IOException {
+        return currentVersion;
     }
 
     private long VersionStringToInt(String s){
