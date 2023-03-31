@@ -31,6 +31,7 @@ public class MainWindow {
     JLabel label,label1,label2,label3,label4,label5,label6,label7,label8,label9,label10,label11;
     SoundUtil soundUtil=new SoundUtil();
     String postUrl="";
+    String eewData="";
 
     public MainWindow() {
         // 定义程序窗口及控件属性
@@ -135,15 +136,20 @@ public class MainWindow {
             }
         });
 
+        TimerTask timerQueryEEW=new TimerTask() {
+            @Override
+            public void run() {
+                eewData=HttpUtil.sendGet("https://mobile.chinaeew.cn", "/v1/earlywarnings?updates=&start_at=");
+            }
+        };
+        new Timer().schedule(timerQueryEEW,0,3000L);
+
+        // 创建一个定时任务用于获取地震信息
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
                 try {
-                    String url = HttpUtil.sendGet("https://mobile.chinaeew.cn", "/v1/earlywarnings?updates=&start_at=");
-                    // 创建一个定时任务用于获取地震信息
-                    TaskFunction1(url);
-                    // 再创建一个定时任务用于倒计时
-                    TaskFunction2(url);
+                    TaskFunction1(eewData);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -151,6 +157,19 @@ public class MainWindow {
         };
         // 每3秒向api接口发送一次请求
         new Timer().schedule(timerTask, 0L, 3000L);
+
+        // 再创建一个定时任务用于倒计时
+        TimerTask timerTaskCounter=new TimerTask() {
+            @Override
+            public void run() {
+                try{
+                    TaskFunction2(eewData);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        };
+        new Timer().schedule(timerTaskCounter,0,3000);
 
         // 创建另一个定时任务用于获取当前时间
         TimerTask timerTask1 = new TimerTask() {
