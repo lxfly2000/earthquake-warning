@@ -1,16 +1,19 @@
 package cn.dxr.quake.app;
 
 import cn.dxr.quake.GUI.MainWindow;
-import cn.dxr.quake.GUI.SettingsPage;
+import cn.dxr.quake.GUI.SettingsDialog;
 import cn.dxr.quake.Utils.HttpUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.io.FileUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.Timer;
@@ -23,15 +26,22 @@ public class AppTray {
     private static final Image image = Toolkit.getDefaultToolkit().getImage("Files\\img\\tray.png");
 
     private static final TrayIcon trayIcon = new TrayIcon(image);
+    private static String postUrl="";
 
     public AppTray() {
+        try{
+            JSONObject jURL=JSON.parseObject(FileUtils.readFileToString(new File("Files/settings.json")));
+            postUrl=jURL.getString("PushURL");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
         // 托盘右键菜单
         JDialog jDialog = new JDialog();
         jDialog.setUndecorated(true);
         jDialog.setSize(1,1);
         JPopupMenu jPopupMenu = new JPopupMenu();
         JMenuItem jmenuItem = new JMenuItem("设置");
-        jmenuItem.addActionListener(e -> new SettingsPage());
+        jmenuItem.addActionListener(e -> new SettingsDialog());
         JMenuItem jmenuItem2 = new JMenuItem("显示主窗口");
         jmenuItem2.addActionListener(e -> MainWindow.show());
         JMenuItem jmenuItem1 = new JMenuItem("退出程序");
@@ -81,6 +91,9 @@ public class AppTray {
                             String mag = json.getString("magnitude");
                             String depth = json.getString("depth");
                             double maxInt = MainWindow.calcMaxInt(json.getDouble("magnitude"),json.getDouble("depth"));
+                            if(postUrl.length()>0){
+                                HttpUtil.sendPost(postUrl,json.toString());
+                            }
                             showMessage("中国地震台网" + type,time + "在" + region + "(北纬" + lat + "度,东经" + lng + "度)" + "发生" + mag + "级地震,震源深度" + depth +"公里,预估最大烈度" + decimalFormat.format(maxInt) + "度");
                             id = json.getString("id");
                         }
