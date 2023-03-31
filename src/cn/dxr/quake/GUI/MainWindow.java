@@ -204,7 +204,7 @@ public class MainWindow {
         SimpleDateFormat format =  new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
         Long time = new Long(json.getString("startAt"));
         double maxInt = calcMaxInt(json.getDouble("magnitude"),json.getDouble("depth"));
-        double arriveTime = Double.parseDouble(decimalFormat.format(getArriveTime()));
+        double arriveTime = Double.parseDouble(decimalFormat.format(getArriveTime(data)));
         String date = format.format(time);
         String file = FileUtils.readFileToString(path);
         JSONObject jsonObject = JSON.parseObject(file);
@@ -216,7 +216,7 @@ public class MainWindow {
         if (local < 0) {
             localInt = "0.0";
         }
-        label10.setText("本地烈度: " + localInt + "度" + " " + getFeel());
+        label10.setText("本地烈度: " + localInt + "度" + " " + getFeel(data));
         label9.setText("震中距: 约" + distance + "KM");
         String file1 = FileUtils.readFileToString(path1);
         JSONObject jsonObject1 = JSON.parseObject(file1);
@@ -260,7 +260,7 @@ public class MainWindow {
                     //转发ICL速报信息
                     HttpUtil.sendPost(postUrl,json.toString());
                 }
-                AppTray.showMessage("现正发生有感地震",decimalFormat.format(json.getDouble("magnitude")) + "级地震," + arriveTime + "秒后抵达\n" + "您所在的地区将" + getFeel() + ",请合理避险!");
+                AppTray.showMessage("现正发生有感地震",decimalFormat.format(json.getDouble("magnitude")) + "级地震," + arriveTime + "秒后抵达\n" + "您所在的地区将" + getFeel(data) + ",请合理避险!");
                 EventID = json.getString("eventId");
             } else {
                 jFrame.setAlwaysOnTop(false);
@@ -303,10 +303,10 @@ public class MainWindow {
     }
 
     // 获取横波到达时间
-    public static double getArriveTime() {
+    public static double getArriveTime(String data) {
         File path = new File("Files\\settings.json");
         try {
-            String url = HttpUtil.sendGet("https://mobile.chinaeew.cn", "/v1/earlywarnings?updates=&start_at=");
+            String url = data;
             JSONObject jsonObj = JSON.parseObject(url);
             JSONArray jsonArray = jsonObj.getJSONArray("data");
             JSONObject json = jsonArray.getJSONObject(0);
@@ -324,10 +324,10 @@ public class MainWindow {
     }
 
     // 获取震感
-    public static String getFeel() {
+    public static String getFeel(String data) {
         File path = new File("Files\\settings.json");
         try {
-            String url = HttpUtil.sendGet("https://mobile.chinaeew.cn", "/v1/earlywarnings?updates=&start_at=");
+            String url = data;
             JSONObject jsonObj = JSON.parseObject(url);
             JSONArray jsonArray = jsonObj.getJSONArray("data");
             JSONObject json = jsonArray.getJSONObject(0);
