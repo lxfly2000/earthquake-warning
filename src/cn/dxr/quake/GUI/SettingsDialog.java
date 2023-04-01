@@ -31,12 +31,12 @@ public class SettingsDialog extends JDialog {
         getRootPane().setDefaultButton(buttonOK);
         setTitle("设置");
         setIconImage(Toolkit.getDefaultToolkit().getImage("Files/img/icon.png"));
-        setLocationRelativeTo(null);
         pack();
 
         buttonOK.addActionListener(e->onOK());
         buttonCancel.addActionListener(e->onCancel());
         LoadSettings();
+        setLocationRelativeTo(null);
         setVisible(true);//设为模态后，会造成阻塞
     }
 
@@ -62,8 +62,8 @@ public class SettingsDialog extends JDialog {
         }
 
         SoundUtil soundUtil=new SoundUtil();
-        buttonTestEEWSFX.addActionListener(e->soundUtil.playSound("sounds/First.wav"));
-        buttonTestSWAVESFX.addActionListener(e->soundUtil.playSound("sounds/Arrive.wav"));
+        buttonTestEEWSFX.addActionListener(e->soundUtil.playSound("sounds/uimsg.wav"));
+        buttonTestSWAVESFX.addActionListener(e->soundUtil.playSound("sounds/uiwarn.wav"));
     }
 
     private void onOK() {

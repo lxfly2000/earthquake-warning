@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class VersionChecker {
-    public static final String currentVersion="1.6.2";
+    public static final String currentVersion="1.6.3";
 
     // 获取软件当前版本
     public String getVersion() throws IOException {

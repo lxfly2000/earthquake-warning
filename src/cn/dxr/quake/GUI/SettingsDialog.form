@@ -5,7 +5,9 @@
     <constraints>
       <xy x="48" y="54" width="439" height="426"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-16777216"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="94766" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -13,7 +15,9 @@
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-16777216"/>
+        </properties>
         <border type="none"/>
         <children>
           <hspacer id="98af6">
@@ -26,7 +30,9 @@
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-16777216"/>
+            </properties>
             <border type="none"/>
             <children>
               <component id="e7465" class="javax.swing.JButton" binding="buttonOK">
@@ -34,7 +40,8 @@
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="OK"/>
+                  <font name="Microsoft YaHei"/>
+                  <text value="确定"/>
                 </properties>
               </component>
               <component id="5723f" class="javax.swing.JButton" binding="buttonCancel">
@@ -42,7 +49,8 @@
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
-                  <text value="Cancel"/>
+                  <font name="Microsoft YaHei"/>
+                  <text value="取消"/>
                 </properties>
               </component>
             </children>
@@ -54,7 +62,9 @@
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-16777216"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="34f5e" class="javax.swing.JLabel">
@@ -62,6 +72,8 @@
               <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
+              <foreground color="-1"/>
               <text value="-----用户所在地经纬度设置-----"/>
             </properties>
           </component>
@@ -72,6 +84,8 @@
               </grid>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
+              <foreground color="-1"/>
               <text value="纬度"/>
             </properties>
           </component>
@@ -82,6 +96,8 @@
               </grid>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
+              <foreground color="-1"/>
               <text value="-----预警音效试听-----"/>
             </properties>
           </component>
@@ -92,6 +108,8 @@
               </grid>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
+              <foreground color="-1"/>
               <text value="地震预警发布时"/>
             </properties>
           </component>
@@ -102,6 +120,8 @@
               </grid>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
+              <foreground color="-1"/>
               <text value="地震横波抵达时"/>
             </properties>
           </component>
@@ -112,6 +132,8 @@
               </grid>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
+              <foreground color="-1"/>
               <text value="-----预警烈度阈值设置-----"/>
             </properties>
           </component>
@@ -122,6 +144,8 @@
               </grid>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
+              <foreground color="-1"/>
               <text value="注：当本地预估烈度达到以下所设阈值及以上时都会预警"/>
             </properties>
           </component>
@@ -130,6 +154,7 @@
               <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
               <model>
                 <item value="不设置"/>
                 <item value="2度"/>
@@ -143,6 +168,7 @@
               <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
               <text value="试听"/>
             </properties>
           </component>
@@ -151,6 +177,7 @@
               <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
               <text value="试听"/>
             </properties>
           </component>
@@ -161,6 +188,8 @@
               </grid>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
+              <foreground color="-1"/>
               <text value="经度"/>
             </properties>
           </component>
@@ -170,7 +199,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <font name="Microsoft YaHei"/>
+            </properties>
           </component>
           <component id="9b666" class="javax.swing.JTextField" binding="editLongitude">
             <constraints>
@@ -178,13 +209,17 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <font name="Microsoft YaHei"/>
+            </properties>
           </component>
           <component id="4667f" class="javax.swing.JLabel">
             <constraints>
               <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
+              <foreground color="-1"/>
               <text value="烈度"/>
             </properties>
           </component>
@@ -193,6 +228,8 @@
               <grid row="9" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
+              <foreground color="-1"/>
               <text value="-----转发设置-----"/>
             </properties>
           </component>
@@ -201,6 +238,8 @@
               <grid row="10" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
+              <foreground color="-1"/>
               <text value="注：地震预警的JSON数据会以POST方式转发至设置的URL"/>
             </properties>
           </component>
@@ -209,6 +248,8 @@
               <grid row="11" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Microsoft YaHei"/>
+              <foreground color="-1"/>
               <text value="URL"/>
             </properties>
           </component>
@@ -218,7 +259,9 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <font name="Microsoft YaHei"/>
+            </properties>
           </component>
         </children>
       </grid>

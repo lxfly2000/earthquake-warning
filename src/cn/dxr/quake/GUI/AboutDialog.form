@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="cn.dxr.quake.GUI.AboutDialog">
+  <grid id="cbd77" binding="contentPane" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="10" left="10" bottom="10" right="10"/>
+    <constraints>
+      <xy x="48" y="54" width="487" height="321"/>
+    </constraints>
+    <properties>
+      <background color="-16777216"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="e3588" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-16777216"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="e7465" class="javax.swing.JButton" binding="buttonOK">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Microsoft YaHei"/>
+              <text value="确定"/>
+            </properties>
+          </component>
+          <component id="4a37e" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Microsoft YaHei" size="24" style="1"/>
+              <foreground color="-1"/>
+              <text value="关于本软件"/>
+            </properties>
+          </component>
+          <component id="fee13" class="javax.swing.JTextArea" default-binding="true">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-16777216"/>
+              <editable value="false"/>
+              <font name="Microsoft YaHei" size="16"/>
+              <foreground color="-1"/>
+              <text value="软件作者：dxr_xie2019（简称Dxr） QQ：2194362576&#10;本软件禁止用于商业用途！如有疑问或有合作意图可联系作者QQ&#10;以下机构、团体或软件为本软件提供了帮助，在此统一鸣谢：&#10;成都高新减灾研究所（ICL） 提供地震预警信息&#10;chinaeew.cn 提供API接口&#10;JQuake 提供软件图标&#10;Kiwi Monitor 提供地震横波到达时的音效&#10;SREV 提供地震预警发布时的音效&#10;&#10;另外还要感谢ttcctctc、吉尔or小吉等用户对本软件的支持！"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

@@ -107,7 +107,7 @@ public class MainWindow {
         JPopupMenu jPopupMenu = new JPopupMenu();
         JMenuItem jMenuItem = new JMenuItem("关于");
         jMenuItem.setFont(new Font("微软雅黑",Font.BOLD,12));
-        jMenuItem.addActionListener(e -> new AboutPage());
+        jMenuItem.addActionListener(e -> new AboutDialog());
         JMenuItem jMenuItem1 = new JMenuItem("设置");
         jMenuItem1.setFont(new Font("微软雅黑",Font.BOLD,12));
         jMenuItem1.addActionListener(e -> new SettingsDialog());
@@ -252,7 +252,7 @@ public class MainWindow {
                     jPanel.setBackground(new Color(147, 7, 7, 255));
                 }
                 if (local > userInt) {
-                    soundUtil.playSound("sounds\\First.wav");
+                    soundUtil.playSound("sounds/uimsg.wav");
                     jFrame.setAlwaysOnTop(true);
                     jFrame.setVisible(true);
                 }
@@ -290,7 +290,7 @@ public class MainWindow {
                 for (int i = time; i > -1; i--) {
                     label11.setText("地震横波将在" + i + "秒后抵达");
                     if (i == 0) {
-                        soundUtil.playSound("sounds\\Arrive.wav");
+                        soundUtil.playSound("sounds/uiwarn.wav");
                         label11.setText("地震横波已抵达");
                     }
                     Thread.sleep(1000L);
